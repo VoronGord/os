@@ -1,29 +1,34 @@
+
 import java.util.ArrayList;
 
 public class process {
-	private ArrayList Process = new ArrayList();;
-	private stream stream = new stream();
-	private int num = 0;
-	public static int status [] = new int[10];
-	
-	public void CreateProcess (int num) {
-		this.num = num;
-		for (int i=0; i<num; i++) {
-			System.out.println("Процесс: " + i);
-			Process.add(stream.CreateStream(i, 3));
-			System.out.println(Process.get(i));
-		}
-		System.out.println("Потоки созданы");
-	}
-	
-	public void CheckProcess () {
-		while (status[0] != 4 || status[1] != 4) {
-			for (int i = 0; i<num; i++) {
-				System.out.println("Процесс: " + i);
-				Process.set(i, stream.ImplStream (i));
-				System.out.println(Process.get(i));			
-			}			
+
+	private ArrayList<Thread> threads;
+
+	private String name;
+
+	public process() {
+		int k = (int) (Math.random() * 4) + 1;
+		threads = new ArrayList<Thread>();
+		for (int i = 0; i < k; i++) {
+			int n = i + 1;
+			threads.add(new Thread(n));
 		}
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String n) {
+		name = n;
+	}
+
+	public ArrayList<Thread> getThreads() {
+		return threads;
+	}
+
+	public void setThreads(ArrayList<Thread> thread) {
+		threads = thread;
+	}
 }
