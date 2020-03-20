@@ -10,7 +10,7 @@ public class process {
 		this.num = num;
 		for (int i=0; i<num; i++) {
 			System.out.println("Процесс: " + i);
-			Process.add(stream.CreateStream(i, (int)(Math.random()*5) +1));
+			Process.add(stream.CreateStream(i, 3));
 			System.out.println(Process.get(i));
 		}
 		System.out.println("Потоки созданы");
