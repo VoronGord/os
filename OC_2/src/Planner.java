@@ -38,26 +38,30 @@ public class Planner {
 	private String makePlanThreads(ArrayList<Thread> threads, int quant) {
 		StringBuilder sb = new StringBuilder();
 		quant = QUANT;
-		for (int i = 0; i < threads.size(); i++)
+		for (int i = 0; i < threads.size(); i++) {
+			
 			while ((threads.get(i).getOstTime() > 0) && (quant > 0)) {
-				sb.append("Поток №" + threads.get(i).getName() + ", в процессе, " + "осталось времени "
-						+ threads.get(i).getOstTime()  + "\n");
-				threads.get(i).setOstTime(threads.get(i).getOstTime() - 1);
+				Thread j =  threads.get(i);
+				sb.append("Поток №" + j.getName() + ", в процессе, " + "осталось времени "
+						+ j.getOstTime()  + "\n");
+				j.setOstTime(j.getOstTime() - 1);
 				quant--;
-				if (quant == 0 && threads.get(i).getOstTime() != 0) {
-					sb.append("Поток №" + threads.get(i).getName() + ", Остановлен, осталось времени "
-							+ threads.get(i).getOstTime()  + "\n");
+				if (quant == 0 && j.getOstTime() != 0) {
+					sb.append("Поток №" + j.getName() + ", Остановлен, осталось времени "
+							+ j.getOstTime()  + "\n");
 
 					break;
 				}
-				if (threads.get(i).getOstTime() == 0) {
-					sb.append("Поток №" + threads.get(i).getName() + ", Завершен, осталось времени "
-							+ threads.get(i).getOstTime()  + "\n");
+				if (j.getOstTime() == 0) {
+					sb.append("Поток №" + j.getName() + ", Завершен, осталось времени "
+							+ j.getOstTime()  + "\n");
 					threads.remove(i);
 					--i;
 					break;
 				}
 			}
+		}
+			
 		return sb.toString();
 	}
 
