@@ -18,12 +18,12 @@ public class Planner {
 		StringBuilder sb = new StringBuilder();
 		int i = 0;
 	
-		sort();
+	
 		
 		while (process.size() > 0) {
 			sb.append(
 					"Процесс №" + process.get(i).getName() + " , Приоритет " + process.get(i).getPriority() + ", Потоков " + process.get(i).getThreads().size() +  "\n");
-			sb.append(makePlanThreads(process.get(i).getThreads(), QUANT));
+			sb.append(makePlanThreads(process.get(i).getThreads(), QUANT * (process.get(i).getPriority() /2)));
 			if (process.get(i).getThreads().size() > 0) {
 				sb.append("Oсталось потоков " + process.get(i).getThreads().size() + "\n");
 				i++;
@@ -41,7 +41,7 @@ public class Planner {
 
 	private String makePlanThreads(ArrayList<Thread> threads, int quant) {
 		StringBuilder sb = new StringBuilder();
-		quant = QUANT;
+		
 	
 					
 		for (int i = 0; i < threads.size(); i++) {
@@ -69,21 +69,7 @@ public class Planner {
 		}
 			
 		return sb.toString();
-	}
-
-	public void sort() {
-		for (int i = process.size() - 1; i > 0; i--) {
-			for (int j = 0; j < i; j++) {
-				if (process.get(j).getPriority() < process.get(j + 1)
-						.getPriority()) {
-					process tmp = process.get(j);
-					process.set(j, process.get(j + 1));
-					process.set(j + 1, tmp);
-				}
-			}
-		}
-	}
-	
+	}	
 }
 
  
